@@ -44,76 +44,26 @@ import seaborn as sns
 # import girth
 ```
 
-### Package Installation Helper
+### Package Installation
+
+All required packages are provisioned once by the repo's `./setup.sh` into `.venv/` — do not
+`pip install` mid-analysis into an unknown interpreter. For the optional advanced methods
+(`semopy`, `factor_analyzer`, `lifelines`, `pyreadstat`), install the `[advanced]` extra:
+`pip install -e ".[advanced]"` (from an activated `.venv`). If a needed package is missing, that
+means setup wasn't run with `[advanced]` — say so, don't shell out to `pip` ad hoc.
+
+## Font Configuration
+
+**No system font hunting needed.** matplotlib ships with DejaVu Sans, which has full Latin
+coverage including Turkish (ş ğ ı ö ç ü). Set it explicitly rather than relying on fallback:
 
 ```python
-def ensure_package(package_name, import_name=None):
-    """Install package if not available."""
-    import_name = import_name or package_name
-    try:
-        __import__(import_name)
-    except ImportError:
-        import subprocess
-        subprocess.check_call(['pip', 'install', package_name])
-        __import__(import_name)
-
-# Example usage:
-# ensure_package('semopy')
-# ensure_package('factor_analyzer')
-```
-
-## Chinese Font Configuration (CRITICAL)
-
-**Must run this before any plotting to avoid blank boxes in Chinese labels:**
-
-```python
-import matplotlib.pyplot as plt
-import matplotlib.font_manager as fm
-
-def setup_chinese_font():
-    """Configure matplotlib for Chinese display. Call before any plotting."""
-    # Priority order: try common Chinese fonts
-    font_candidates = [
-        'Noto Sans CJK JP',      # Available in most Linux systems
-        'Noto Sans CJK SC',      # Simplified Chinese specific
-        'Noto Sans CJK TC',      # Traditional Chinese
-        'Source Han Sans',       # Adobe's open source
-        'WenQuanYi Micro Hei',   # Common Linux Chinese font
-        'SimHei',                # Windows
-        'Microsoft YaHei',       # Windows
-        'PingFang SC',           # macOS
-        'Heiti SC',              # macOS
-    ]
-
-    available_fonts = set(f.name for f in fm.fontManager.ttflist)
-
-    # Find first available font
-    selected_font = None
-    for font in font_candidates:
-        if font in available_fonts:
-            selected_font = font
-            break
-
-    if selected_font:
-        plt.rcParams['font.sans-serif'] = [selected_font, 'DejaVu Sans']
-        print(f"Using Chinese font: {selected_font}")
-    else:
-        print("Warning: No Chinese font found, text may display as boxes")
-        plt.rcParams['font.sans-serif'] = ['DejaVu Sans']
-
-    plt.rcParams['axes.unicode_minus'] = False
-    return selected_font
-
-# Call at start of analysis
-setup_chinese_font()
-```
-
-**Quick version (if you know Noto is available):**
-
-```python
-plt.rcParams['font.sans-serif'] = ['Noto Sans CJK JP', 'DejaVu Sans']
+plt.rcParams['font.sans-serif'] = ['DejaVu Sans']
 plt.rcParams['axes.unicode_minus'] = False
 ```
+
+(This block is also applied by `statrep.figures.style.init_figure()` — prefer that when
+generating figures through `report-builder`/`statrep` rather than duplicating it inline.)
 
 ## Descriptive Statistics
 
@@ -508,7 +458,7 @@ When R execution is required:
 ```dockerfile
 FROM rocker/tidyverse:4.3.2
 
-# Chinese language support
+# UTF-8 locale (needed for Turkish/multilingual text)
 ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
 

@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "statrep"
+version = "0.1.0"
+description = "Data in, Word statistical report out — Excel/CSV to a finished .docx, TR/EN, no Office/SPSS/R installation required."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+dependencies = [
+    # Document assembly
+    "pypandoc-binary>=1.17",   # pandoc is bundled in the wheel, no system install needed
+    "python-docx>=1.2",
+    "docxtpl>=0.20",
+    "lxml>=5.0",
+    # Analysis
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "scipy>=1.13",
+    "statsmodels>=0.14",
+    "pingouin>=0.5.4",
+    "scikit-learn>=1.5",
+    # Figures
+    "matplotlib>=3.9",
+    "seaborn>=0.13",
+    "Pillow>=10.0",
+    # I/O
+    "openpyxl>=3.1",
+    "xlrd>=2.0",
+    "XlsxWriter>=3.2",
+    "charset-normalizer>=3.3",
+    # Infrastructure
+    "PyYAML>=6.0",
+    "Jinja2>=3.1",
+    "pypdf>=4.2",
+]
+
+[project.optional-dependencies]
+advanced = ["semopy", "factor-analyzer", "lifelines", "pyreadstat"]
+dev = ["pytest>=8.0", "ruff>=0.6", "PyMuPDF>=1.24"]
+
+[project.scripts]
+statrep = "statrep.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+statrep = ["i18n/*.yaml", "report/outlines/*.yaml", "render/reference/*.docx"]

@@ -1,0 +1,118 @@
+# English strings for statrep-generated reports.
+# Dotted-key namespaces: section.* (headings), term.* (terminology),
+# table.*/figure.* (captions, column headers), prose.* (sentence templates).
+# Keep keys in exact 1:1 correspondence with tr.yaml.
+
+section:
+  cover:
+    subtitle_default: "Statistical Analysis Report"
+  toc: "Table of Contents"
+  introduction: "Introduction"
+  data_quality: "Data Quality"
+  descriptives:
+    continuous: "Descriptive Statistics — Continuous Variables"
+    categorical: "Descriptive Statistics — Categorical Variables"
+  correlation: "Correlation Analysis"
+  comparisons: "Group Comparisons"
+  regression: "Regression Analysis"
+  conclusion: "Conclusion and Recommendations"
+  appendix:
+    assumptions: "Appendix A: Assumption Checks"
+
+term:
+  mean: "M"
+  sd: "SD"
+  n: "n"
+  missing: "Missing"
+  skewness: "Skewness"
+  kurtosis: "Kurtosis"
+  median: "Median"
+  minimum: "Min"
+  maximum: "Max"
+  variable: "Variable"
+  group: "Group"
+  category: "Category"
+  frequency: "n"
+  percent: "%"
+  df: "df"
+  independent_ttest: "Independent samples t-test"
+  welch_ttest: "Welch's t-test"
+  mann_whitney: "Mann-Whitney U test"
+  one_way_anova: "One-way ANOVA"
+  kruskal_wallis: "Kruskal-Wallis test"
+  cohens_d: "Cohen's d"
+  eta_squared: "η²"
+  r_squared: "R²"
+  adjusted_r_squared: "Adjusted R²"
+  beta: "β"
+  vif: "VIF"
+  predictor: "Predictor"
+  intercept: "(Intercept)"
+  corr_weak: "weakly"
+  corr_moderate: "moderately"
+  corr_strong: "strongly"
+  by: "by"
+
+table:
+  desc_continuous:
+    caption: "Table {n}. Descriptive Statistics for Continuous Variables"
+  desc_categorical:
+    caption: "Table {n}. Descriptive Statistics for Categorical Variables"
+  comparison:
+    caption: "Table {n}. Comparison of {dv} by {group}"
+  correlation:
+    caption: "Table {n}. Correlation Matrix"
+  regression:
+    caption: "Table {n}. Regression Results Predicting {dv}"
+  missing_values:
+    caption: "Table {n}. Missing Value Summary"
+  note:
+    apa_stars: "*p < .05. **p < .01. ***p < .001."
+
+figure:
+  distribution:
+    caption: "Figure {n}. Distribution of {var}"
+  group_comparison:
+    caption: "Figure {n}. Comparison of {dv} by {group}"
+  anova_boxplot:
+    caption: "Figure {n}. Distribution of {dv} by {group}"
+  correlation_heatmap:
+    caption: "Figure {n}. Correlation Heatmap"
+  regression_coefficients:
+    caption: "Figure {n}. Standardized Regression Coefficients"
+
+prose:
+  descriptives_continuous: >-
+    On average, {var} was {m} (SD = {sd}, n = {n}).
+  comparison_ttest: >-
+    A {test_name} indicated that {dv} differed significantly between
+    {group_a} (M = {m_a}, SD = {sd_a}) and {group_b} (M = {m_b}, SD = {sd_b}),
+    {stat_symbol}({df}) = {stat}, p {p}, {effect_symbol} = {effect}.
+  comparison_ttest_ns: >-
+    A {test_name} found no significant difference in {dv} between
+    {group_a} (M = {m_a}, SD = {sd_a}) and {group_b} (M = {m_b}, SD = {sd_b}),
+    {stat_symbol}({df}) = {stat}, p {p}.
+  comparison_anova: >-
+    A {test_name} indicated a significant difference in {dv} across
+    {group} groups, F({df1}, {df2}) = {stat}, p {p}, η² = {effect}.
+  comparison_anova_ns: >-
+    A {test_name} found no significant difference in {dv} across
+    {group} groups, F({df1}, {df2}) = {stat}, p {p}.
+  comparison_mannwhitney: >-
+    A {test_name} indicated that {dv} differed significantly between
+    {group_a} (Mdn = {mdn_a}) and {group_b} (Mdn = {mdn_b}), U = {stat},
+    p {p}, r = {effect}.
+  comparison_mannwhitney_ns: >-
+    A {test_name} found no significant difference in {dv} between
+    {group_a} (Mdn = {mdn_a}) and {group_b} (Mdn = {mdn_b}), U = {stat}, p {p}.
+  correlation_summary: >-
+    {var_a} and {var_b} were {strength} correlated, r({df}) = {r}, p {p}.
+  regression_summary: >-
+    The regression model significantly predicted {dv},
+    F({df1}, {df2}) = {f}, p {p}, R² = {r2} (adjusted R² = {adj_r2}).
+  method_switched_normality: >-
+    {var} failed the normality test ({test_name}, p {p}) — automatically
+    switched to {alt_method} (non-parametric alternative).
+  method_switched_variance: >-
+    Levene's test indicated unequal variances (p {p}) — automatically
+    switched to Welch's t-test.

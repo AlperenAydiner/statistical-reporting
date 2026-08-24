@@ -46,21 +46,9 @@ root, and was copied from there into `.claude/skills/diagram-design/`. Its compa
 `/doctor`, `/export-diagram`, `/import-drawio`, `/import-mermaid`, `/profile` commands were
 added under `.claude/commands/` (their relative paths match this project's layout exactly).
 
-## 7. [embeddedlayers/mcp-analytics](https://github.com/embeddedlayers/mcp-analytics)
-Not a skill — a hosted MCP server (paid/credit-based SaaS at mcpanalytics.ai). Its connection
-config was added to `.mcp.json` at the repo root:
-
-```json
-{
-  "mcpServers": {
-    "mcp-analytics": {
-      "command": "npx",
-      "args": ["-y", "mcp-remote@latest", "https://api.mcpanalytics.ai/auth0"]
-    }
-  }
-}
-```
-
-On first use it opens a browser for OAuth sign-in at [mcpanalytics.ai](https://mcpanalytics.ai)
-(free account, 500 welcome credits) — that step requires signing up, so it wasn't done
-automatically and needs to be completed by the account owner.
+## 7. [embeddedlayers/mcp-analytics](https://github.com/embeddedlayers/mcp-analytics) — removed
+Initially added as a hosted MCP server (paid/credit-based SaaS at mcpanalytics.ai, requiring
+OAuth sign-up) for commissioning statistical reports. Removed once `statrep` — this repo's own
+`src/statrep/` CLI — shipped: it does the same job (data in, Word report out) with no signup,
+no per-report cost, and no third-party dependency, which is a better fit for a repo meant to be
+freely `git clone`d and used. See the root [README.md](../../README.md) for `statrep` usage.

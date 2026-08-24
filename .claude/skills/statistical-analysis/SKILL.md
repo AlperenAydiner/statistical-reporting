@@ -321,7 +321,7 @@ def write_ttest_result(group1_name, group2_name, dv_name,
     )
 ```
 
-**Output language**: English by default (standard for manuscripts). If the user says "Chinese", generate a Chinese version.
+**Output language**: English by default (standard for manuscripts). For a Turkish or bilingual deliverable, hand off to the `report-builder` skill / `statrep` CLI, which handles TR/EN section text, APA-Turkish number formatting, and terminology (see `.claude/skills/report-builder/`).
 
 ---
 
@@ -339,8 +339,8 @@ import seaborn as sns
 import numpy as np
 
 def init_figure(figsize=(10, 6)):
-    """Unified figure initialization: CJK fonts + APA style"""
-    plt.rcParams['font.sans-serif'] = ['Arial Unicode MS', 'Heiti TC', 'PingFang SC', 'SimHei']
+    """Unified figure initialization: Turkish/Latin-safe fonts + APA style"""
+    plt.rcParams['font.sans-serif'] = ['DejaVu Sans']  # full Turkish (ş ğ ı ö ç ü) coverage, no system font needed
     plt.rcParams['axes.unicode_minus'] = False
     plt.rcParams['figure.dpi'] = 300
     plt.rcParams['savefig.dpi'] = 300
@@ -668,15 +668,18 @@ icc = pg.intraclass_corr(data=df_long, targets='subject',
 
 ## Execution Strategy
 
-### Default: Python (install missing packages as needed)
+### Default: Python (dependencies provisioned by `./setup.sh`)
 
-```bash
-pip3 install scipy statsmodels pingouin matplotlib seaborn scikit-learn --quiet --break-system-packages
-```
+All required packages (scipy, statsmodels, pingouin, matplotlib, seaborn, scikit-learn, …) are
+installed into the repo's own `.venv/` by `./setup.sh` — never install into the system
+interpreter (Ubuntu 24.04 marks it externally-managed; `--break-system-packages` is a footgun,
+not a fix). If a package is missing mid-session, that means setup didn't run: point the user at
+`./setup.sh`, don't `pip install` ad hoc.
 
-**CJK plotting support**:
+**Turkish/Latin plotting support** (no CJK font hunting needed — DejaVu Sans ships with
+matplotlib and fully covers ş ğ ı ö ç ü):
 ```python
-plt.rcParams['font.sans-serif'] = ['Arial Unicode MS', 'Heiti TC', 'PingFang SC']
+plt.rcParams['font.sans-serif'] = ['DejaVu Sans']
 plt.rcParams['axes.unicode_minus'] = False
 ```
 
@@ -724,7 +727,7 @@ cd docker/
 Each analysis must output:
 1. **APA table** (Excel + Markdown) -- format per `references/table-formats.md`
 2. **Figure** (PNG, dpi=300) -- type per table below
-3. **Result paragraph** (English, switchable to Chinese) -- ready for direct insertion into a manuscript
+3. **Result paragraph** (English by default; TR/EN via `report-builder`/`statrep`) -- ready for direct insertion into a manuscript
 
 ### Table Format (APA 7th Edition)
 

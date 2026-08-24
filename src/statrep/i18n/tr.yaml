@@ -1,0 +1,127 @@
+# Türkçe metinler — statrep tarafından üretilen raporlar için.
+# Anahtar noktalı ad alanları: section.* (başlıklar), term.* (terminoloji),
+# table.*/figure.* (başlıklar, sütun adları), prose.* (cümle şablonları).
+# Anahtarlar en.yaml ile birebir eşleşmelidir.
+#
+# Not: mean/sd gibi istatistik sembolleri varsayılan olarak "apa_latin"
+# stilinde tutulur (APA 7 Türkçe çevirileri Latin sembolleri korur — M, SD).
+# "turkish" stili (Ort., SS) M2'de eklenecek bir yapılandırma seçeneğidir.
+
+section:
+  cover:
+    subtitle_default: "İstatistiksel Analiz Raporu"
+  toc: "İçindekiler"
+  introduction: "Giriş"
+  data_quality: "Veri Kalitesi"
+  descriptives:
+    continuous: "Betimsel İstatistikler — Sürekli Değişkenler"
+    categorical: "Betimsel İstatistikler — Kategorik Değişkenler"
+  correlation: "Korelasyon Analizi"
+  comparisons: "Grup Karşılaştırmaları"
+  regression: "Regresyon Analizi"
+  conclusion: "Sonuç ve Öneriler"
+  appendix:
+    assumptions: "Ek A: Varsayım Kontrolleri"
+
+term:
+  mean: "M"
+  sd: "SD"
+  n: "n"
+  missing: "Kayıp"
+  skewness: "Çarpıklık"
+  kurtosis: "Basıklık"
+  median: "Medyan"
+  minimum: "Min"
+  maximum: "Maks"
+  variable: "Değişken"
+  group: "Grup"
+  category: "Kategori"
+  frequency: "n"
+  percent: "%"
+  df: "sd"
+  independent_ttest: "Bağımsız örneklem t-testi"
+  welch_ttest: "Welch t-testi"
+  mann_whitney: "Mann-Whitney U testi"
+  one_way_anova: "Tek yönlü varyans analizi (ANOVA)"
+  kruskal_wallis: "Kruskal-Wallis testi"
+  cohens_d: "Cohen's d"
+  eta_squared: "η²"
+  r_squared: "R²"
+  adjusted_r_squared: "Düzeltilmiş R²"
+  beta: "β"
+  vif: "VIF"
+  predictor: "Yordayıcı"
+  intercept: "(Sabit)"
+  corr_weak: "zayıf düzeyde"
+  corr_moderate: "orta düzeyde"
+  corr_strong: "güçlü düzeyde"
+  by: "göre"
+
+table:
+  desc_continuous:
+    caption: "Tablo {n}. Sürekli Değişkenler İçin Betimsel İstatistikler"
+  desc_categorical:
+    caption: "Tablo {n}. Kategorik Değişkenler İçin Betimsel İstatistikler"
+  comparison:
+    caption: "Tablo {n}. {dv} Değişkeninin {group} Değişkenine Göre Karşılaştırması"
+  correlation:
+    caption: "Tablo {n}. Korelasyon Matrisi"
+  regression:
+    caption: "Tablo {n}. {dv} Değişkenini Yordayan Regresyon Sonuçları"
+  missing_values:
+    caption: "Tablo {n}. Kayıp Değer Özeti"
+  note:
+    apa_stars: "*p < ,05. **p < ,01. ***p < ,001."
+
+figure:
+  distribution:
+    caption: "Şekil {n}. {var} Değişkeninin Dağılımı"
+  group_comparison:
+    caption: "Şekil {n}. {dv} Değişkeninin {group} Değişkenine Göre Karşılaştırması"
+  anova_boxplot:
+    caption: "Şekil {n}. {dv} Değişkeninin {group} Değişkenine Göre Dağılımı"
+  correlation_heatmap:
+    caption: "Şekil {n}. Korelasyon Isı Haritası"
+  regression_coefficients:
+    caption: "Şekil {n}. Standartlaştırılmış Regresyon Katsayıları"
+
+prose:
+  descriptives_continuous: >-
+    {var} değişkeni için ortalama {m} (SS = {sd}, n = {n}) olarak hesaplanmıştır.
+  comparison_ttest: >-
+    {test_name} sonucunda {dv} değişkeninin {group_a} (M = {m_a}, SD = {sd_a})
+    ve {group_b} (M = {m_b}, SD = {sd_b}) grupları arasında anlamlı şekilde
+    farklılaştığı bulunmuştur, {stat_symbol}({df}) = {stat}, p {p},
+    {effect_symbol} = {effect}.
+  comparison_ttest_ns: >-
+    {test_name} sonucunda {dv} değişkeninin {group_a} (M = {m_a}, SD = {sd_a})
+    ve {group_b} (M = {m_b}, SD = {sd_b}) grupları arasında anlamlı bir fark
+    bulunmamıştır, {stat_symbol}({df}) = {stat}, p {p}.
+  comparison_anova: >-
+    {test_name} sonucunda {dv} değişkeninin {group} gruplarına göre anlamlı
+    şekilde farklılaştığı bulunmuştur, F({df1}, {df2}) = {stat}, p {p},
+    η² = {effect}.
+  comparison_anova_ns: >-
+    {test_name} sonucunda {dv} değişkeninin {group} gruplarına göre anlamlı
+    bir fark göstermediği bulunmuştur, F({df1}, {df2}) = {stat}, p {p}.
+  comparison_mannwhitney: >-
+    {test_name} sonucunda {dv} değişkeninin {group_a} (Medyan = {mdn_a}) ve
+    {group_b} (Medyan = {mdn_b}) grupları arasında anlamlı şekilde
+    farklılaştığı bulunmuştur, U = {stat}, p {p}, r = {effect}.
+  comparison_mannwhitney_ns: >-
+    {test_name} sonucunda {dv} değişkeninin {group_a} (Medyan = {mdn_a}) ve
+    {group_b} (Medyan = {mdn_b}) grupları arasında anlamlı bir fark
+    bulunmamıştır, U = {stat}, p {p}.
+  correlation_summary: >-
+    {var_a} ile {var_b} arasında {strength} bir ilişki bulunmuştur,
+    r({df}) = {r}, p {p}.
+  regression_summary: >-
+    Regresyon modeli {dv} değişkenini anlamlı şekilde yordamıştır,
+    F({df1}, {df2}) = {f}, p {p}, R² = {r2} (düzeltilmiş R² = {adj_r2}).
+  method_switched_normality: >-
+    {var} değişkeni normallik testini geçememiştir ({test_name}, p {p}) —
+    otomatik olarak {alt_method} (parametrik olmayan alternatif) yöntemine
+    geçilmiştir.
+  method_switched_variance: >-
+    Levene testi varyansların homojen olmadığını göstermiştir (p {p}) —
+    otomatik olarak Welch t-testine geçilmiştir.

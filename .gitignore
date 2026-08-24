@@ -4,3 +4,16 @@
 Thumbs.db
 .DS_Store
 *.log
+
+# statrep: Python build artifacts, venv, generated reports/tests
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.statrep/
+build/
+dist/
+output/
+.pytest_cache/
+.ruff_cache/
+tests/fixtures/*.tmp

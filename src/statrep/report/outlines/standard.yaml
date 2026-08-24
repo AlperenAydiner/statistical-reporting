@@ -1,0 +1,28 @@
+# Standard tier (~15-25 pages): the section order transcribed from
+# `statistical-analysis/assets/report-template.md` (Data Overview ->
+# Descriptives -> Correlation -> Analyses -> Notes) — that file's spine is
+# this tier's spine.
+#
+# M1 note: `report/build.py` currently executes this fixed section set
+# directly rather than driving it fully from this file's `include_if`
+# expressions (that generic outline-resolution engine, and the Brief/
+# Comprehensive/Thesis tiers, are M2+ scope per the plan). This file is the
+# documented target shape build.py's logic matches by hand for now.
+tier: standard
+sections:
+  - id: descriptives_continuous
+    heading_key: section.descriptives.continuous
+    include_if: "profile.n_numeric >= 1"
+    est_pages: 3
+  - id: correlation
+    heading_key: section.correlation
+    include_if: "profile.n_numeric >= 2"
+    est_pages: 2
+  - id: comparisons
+    heading_key: section.comparisons
+    include_if: "profile.n_categorical >= 1 and profile.n_numeric >= 1"
+    est_pages: 2
+  - id: regression
+    heading_key: section.regression
+    include_if: "profile.n_numeric >= 2"
+    est_pages: 2

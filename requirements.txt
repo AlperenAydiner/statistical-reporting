@@ -1,0 +1,33 @@
+# Pinned floor versions for `pip install -r requirements.txt`.
+# For normal use, prefer `pip install -e .` (see pyproject.toml) — this file
+# exists for environments that want a flat requirements list (CI, Docker).
+
+# Document assembly
+pypandoc-binary>=1.17
+python-docx>=1.2
+docxtpl>=0.20
+lxml>=5.0
+
+# Analysis
+pandas>=2.2
+numpy>=1.26
+scipy>=1.13
+statsmodels>=0.14
+pingouin>=0.5.4
+scikit-learn>=1.5
+
+# Figures
+matplotlib>=3.9
+seaborn>=0.13
+Pillow>=10.0
+
+# I/O
+openpyxl>=3.1
+xlrd>=2.0
+XlsxWriter>=3.2
+charset-normalizer>=3.3
+
+# Infrastructure
+PyYAML>=6.0
+Jinja2>=3.1
+pypdf>=4.2

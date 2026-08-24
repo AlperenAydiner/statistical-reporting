@@ -91,7 +91,7 @@ Pause: Please confirm the cleaning results
 | 2 | SEM | lavaan | Path coefficients, model comparison |
 
 ## Output Specifications
-- Chart language: Chinese/English?
+- Chart/report language: English, Turkish, or bilingual? (see `report-builder`/`statrep` for TR/EN)
 - Table format: APA 7
 
 ---
