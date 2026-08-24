@@ -2,8 +2,8 @@
 title: "İş Tatmini ve Özyeterlik Araştırması"
 subtitle: "Staj Projesi / Veri Analiz Raporu"
 lang: tr-TR
-date: "2026-08-24"
-author: "Sılacan Soyer"
+date: "24/08/2026"
+author: "İsim Soyisim"
 ---
 
 # 1. Giriş

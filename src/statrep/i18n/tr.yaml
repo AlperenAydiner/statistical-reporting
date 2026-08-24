@@ -10,6 +10,8 @@
 section:
   cover:
     subtitle_default: "İstatistiksel Analiz Raporu"
+    author_default: "İsim Soyisim"
+    date_format: "%d/%m/%Y"
   toc: "İçindekiler"
   introduction: "Giriş"
   purpose: "Çalışmanın Amacı"

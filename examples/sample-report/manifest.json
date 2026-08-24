@@ -2,9 +2,9 @@
   "meta": {
     "title": "İş Tatmini ve Özyeterlik Araştırması",
     "subtitle": "Staj Projesi / Veri Analiz Raporu",
-    "author": "Sılacan Soyer",
+    "author": "İsim Soyisim",
     "lang": "tr",
-    "date": "2026-08-24",
+    "date": "24/08/2026",
     "input": "tests/fixtures/likert_tr.xlsx"
   },
   "loader": {

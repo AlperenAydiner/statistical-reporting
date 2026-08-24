@@ -154,12 +154,13 @@ def build_report(
         predictors=reg_predictors,
     )
 
+    date_fmt = t("section.cover.date_format") if t.has("section.cover.date_format") else "%d/%m/%Y"
     meta = ReportMeta(
         title=report_title,
         subtitle=subtitle or t("section.cover.subtitle_default"),
-        date=dt.date.today().isoformat(),
+        date=dt.date.today().strftime(date_fmt),
         lang=lang,
-        author=author,
+        author=author or t("section.cover.author_default"),
     )
     md_text = render_markdown(meta, results, narrative=narrative)
     md_path = output_dir / "report.md"

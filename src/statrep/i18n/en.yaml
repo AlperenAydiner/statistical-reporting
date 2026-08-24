@@ -6,6 +6,8 @@
 section:
   cover:
     subtitle_default: "Statistical Analysis Report"
+    author_default: "Firstname Lastname"
+    date_format: "%d/%m/%Y"
   toc: "Table of Contents"
   introduction: "Introduction"
   purpose: "Purpose of the Study"
