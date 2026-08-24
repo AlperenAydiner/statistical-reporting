@@ -78,11 +78,16 @@ def _write_tables_xlsx(tables: list[TableSpec], path: Path) -> None:
             frame.to_excel(writer, sheet_name=f"Table{i}"[:31], index=False)
 
 
+from statrep.report.narrative import _build_dataset_table, generate_narrative
+
+
 def build_report(
     input_path: str | Path,
     output_dir: str | Path,
     lang: str = "tr",
     title: str | None = None,
+    subtitle: str | None = None,
+    author: str | None = None,
     template: str = "academic-apa7",
     dv: str | None = None,
     group_var: str | None = None,
@@ -99,8 +104,14 @@ def build_report(
     ctx = make_context(lang, figures_dir)
     t = ctx.t
 
+    dataset_table = _build_dataset_table(data_profile, ctx)
+
     numeric_vars = _select_numeric(loaded.df, data_profile, MAX_DESCRIPTIVES_VARS)
     results: list[AnalysisResult] = []
+
+    chosen_dv = dv or (numeric_vars[0] if numeric_vars else None)
+    chosen_group_var = group_var or _select_categorical_for_comparison(data_profile)
+    reg_predictors: list[str] | None = None
 
     if numeric_vars:
         results.append(registry.run(
@@ -112,9 +123,7 @@ def build_report(
             "correlation", loaded.df, {"variables": numeric_vars}, ctx,
         ))
 
-    chosen_group_var = group_var or _select_categorical_for_comparison(data_profile)
     if chosen_group_var and numeric_vars:
-        chosen_dv = dv or numeric_vars[0]
         results.append(registry.run(
             "comparison", loaded.df, {"dv": chosen_dv, "group_var": chosen_group_var}, ctx,
         ))
@@ -133,20 +142,33 @@ def build_report(
         )
 
     report_title = title or Path(input_path).stem
+    narrative = generate_narrative(
+        loaded=loaded,
+        profile=data_profile,
+        results=results,
+        ctx=ctx,
+        report_title=report_title,
+        dataset_table=dataset_table,
+        dv=chosen_dv if chosen_group_var else None,
+        group_var=chosen_group_var,
+        predictors=reg_predictors,
+    )
+
     meta = ReportMeta(
         title=report_title,
-        subtitle=t("section.cover.subtitle_default"),
+        subtitle=subtitle or t("section.cover.subtitle_default"),
         date=dt.date.today().isoformat(),
         lang=lang,
+        author=author,
     )
-    md_text = render_markdown(meta, results)
+    md_text = render_markdown(meta, results, narrative=narrative)
     md_path = output_dir / "report.md"
     md_path.write_text(md_text, encoding="utf-8")
 
     reference_docx = _REFERENCE_DIR / f"{template}.docx"
     docx_path = output_dir / "report.docx"
     markdown_to_docx(md_path, docx_path, reference_docx)
-    all_tables = [tbl for r in results for tbl in r.tables]
+    all_tables = [narrative.dataset_table] + [tbl for r in results for tbl in r.tables] + [narrative.appendix_table]
     postprocess(docx_path, all_tables)
 
     html_path = output_dir / "report.html"
@@ -160,7 +182,14 @@ def build_report(
     sps_path.write_text("\n\n".join(sps_blocks) + "\n", encoding="utf-8")
 
     manifest = {
-        "meta": {"title": meta.title, "lang": meta.lang, "date": meta.date, "input": str(input_path)},
+        "meta": {
+            "title": meta.title,
+            "subtitle": meta.subtitle,
+            "author": meta.author,
+            "lang": meta.lang,
+            "date": meta.date,
+            "input": str(input_path),
+        },
         "loader": {
             "encoding": loaded.encoding, "delimiter": loaded.delimiter,
             "decimal": loaded.decimal, "warnings": loaded.warnings,

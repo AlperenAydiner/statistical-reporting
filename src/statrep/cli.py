@@ -30,6 +30,8 @@ def cmd_build(args: argparse.Namespace) -> int:
         output_dir=args.output,
         lang=args.lang,
         title=args.title,
+        subtitle=args.subtitle,
+        author=args.author,
         template=args.template,
         dv=args.dv,
         group_var=args.group_var,
@@ -96,6 +98,8 @@ def build_parser() -> argparse.ArgumentParser:
     p_build.add_argument("--output", default="output", help="Output directory")
     p_build.add_argument("--lang", choices=["tr", "en"], default="tr")
     p_build.add_argument("--title", default=None, help="Report title (default: input filename)")
+    p_build.add_argument("--subtitle", default=None, help="Report subtitle")
+    p_build.add_argument("--author", default=None, help="Report author / prepared by")
     p_build.add_argument("--template", choices=["academic-apa7", "business"], default="academic-apa7")
     p_build.add_argument("--dv", default=None, help="Dependent variable (auto-selected if omitted)")
     p_build.add_argument("--group-var", default=None, help="Grouping variable for comparisons")

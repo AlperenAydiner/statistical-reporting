@@ -80,18 +80,41 @@ def build_academic(dest: Path) -> None:
     _set_font(doc.styles["Normal"], BODY_FONT, 12)
     doc.styles["Normal"].paragraph_format.line_spacing = 2.0  # APA 7: double-spaced body
 
-    _set_font(doc.styles["Title"], BODY_FONT, 16, bold=True)
+    _set_font(doc.styles["Title"], BODY_FONT, 18, bold=True)
     doc.styles["Title"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    doc.styles["Title"].paragraph_format.space_before = Pt(72)
+    doc.styles["Title"].paragraph_format.space_after = Pt(18)
+
+    if "Subtitle" in doc.styles:
+        _set_font(doc.styles["Subtitle"], BODY_FONT, 13, italic=True)
+        doc.styles["Subtitle"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        doc.styles["Subtitle"].paragraph_format.space_after = Pt(24)
+
+    if "Author" in doc.styles:
+        _set_font(doc.styles["Author"], BODY_FONT, 12, bold=True)
+        doc.styles["Author"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        doc.styles["Author"].paragraph_format.space_after = Pt(12)
+
+    if "Date" in doc.styles:
+        _set_font(doc.styles["Date"], BODY_FONT, 11)
+        doc.styles["Date"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        doc.styles["Date"].paragraph_format.space_after = Pt(36)
 
     # APA 7 heading levels: L1 centered bold, L2 flush-left bold,
     # L3 flush-left bold italic, L4+ inherits L3 (run-in headings are a
     # docx/postprocess.py concern, not a paragraph style concern).
     _set_font(doc.styles["Heading 1"], BODY_FONT, 14, bold=True)
     doc.styles["Heading 1"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    doc.styles["Heading 1"].paragraph_format.space_before = Pt(18)
+    doc.styles["Heading 1"].paragraph_format.space_after = Pt(12)
     _set_font(doc.styles["Heading 2"], BODY_FONT, 12, bold=True)
     doc.styles["Heading 2"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    doc.styles["Heading 2"].paragraph_format.space_before = Pt(12)
+    doc.styles["Heading 2"].paragraph_format.space_after = Pt(6)
     _set_font(doc.styles["Heading 3"], BODY_FONT, 12, bold=True, italic=True)
     doc.styles["Heading 3"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    doc.styles["Heading 3"].paragraph_format.space_before = Pt(12)
+    doc.styles["Heading 3"].paragraph_format.space_after = Pt(6)
 
     _set_1inch_margins(doc)
     doc.save(dest)
@@ -105,6 +128,18 @@ def build_business(dest: Path) -> None:
 
     _set_font(doc.styles["Title"], SANS_FONT, 24, bold=True)
     doc.styles["Title"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    if "Subtitle" in doc.styles:
+        _set_font(doc.styles["Subtitle"], SANS_FONT, 14, italic=True)
+        doc.styles["Subtitle"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    if "Author" in doc.styles:
+        _set_font(doc.styles["Author"], SANS_FONT, 12, bold=True)
+        doc.styles["Author"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    if "Date" in doc.styles:
+        _set_font(doc.styles["Date"], SANS_FONT, 11)
+        doc.styles["Date"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
     _set_font(doc.styles["Heading 1"], SANS_FONT, 16, bold=True)
     doc.styles["Heading 1"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT

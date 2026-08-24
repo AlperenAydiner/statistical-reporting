@@ -8,6 +8,14 @@ section:
     subtitle_default: "Statistical Analysis Report"
   toc: "Table of Contents"
   introduction: "Introduction"
+  purpose: "Purpose of the Study"
+  dataset_overview: "Dataset Overview"
+  data_prep: "Data Preparation Process"
+  prep_merge: "Data Merging and Ingestion"
+  prep_cleaning: "Data Cleaning and Quality Control"
+  prep_variables: "Creation of Analysis Variables"
+  prep_analysis_ready: "Data Preparation for Analysis"
+  general_analysis: "General Data Analysis"
   data_quality: "Data Quality"
   descriptives:
     continuous: "Descriptive Statistics — Continuous Variables"
@@ -15,9 +23,15 @@ section:
   correlation: "Correlation Analysis"
   comparisons: "Group Comparisons"
   regression: "Regression Analysis"
-  conclusion: "Conclusion and Recommendations"
+  conclusion: "Conclusions and Recommendations"
+  conclusion_general: "General Findings"
+  conclusion_comparisons: "Group and Relational Findings"
+  conclusion_models: "Model and Predictive Findings"
+  conclusion_recommendations: "Operational and Strategic Recommendations"
   appendix:
-    assumptions: "Appendix A: Assumption Checks"
+    title: "Appendices"
+    variables: "Appendix 1: Variables Included in the Analysis"
+    assumptions: "Appendix 2: Assumption Checks"
 
 term:
   mean: "M"
@@ -35,6 +49,15 @@ term:
   frequency: "n"
   percent: "%"
   df: "df"
+  data_type: "Data Type"
+  valid_n: "Valid N"
+  missing_rate: "Missing Rate"
+  unique_count: "Unique Count"
+  description: "Description"
+  kind_numeric: "Continuous (Numeric)"
+  kind_categorical: "Categorical"
+  kind_datetime: "Date / Time"
+  kind_text: "Text"
   independent_ttest: "Independent samples t-test"
   welch_ttest: "Welch's t-test"
   mann_whitney: "Mann-Whitney U test"
@@ -54,6 +77,10 @@ term:
   by: "by"
 
 table:
+  dataset_variables:
+    caption: "Table {n}. Variables and Characteristics in the Dataset"
+  appendix_variables:
+    caption: "Table {n}. Variables Distribution and Summary List"
   desc_continuous:
     caption: "Table {n}. Descriptive Statistics for Continuous Variables"
   desc_categorical:

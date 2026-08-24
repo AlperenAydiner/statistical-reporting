@@ -1,0 +1,403 @@
+{
+  "meta": {
+    "title": "İş Tatmini ve Özyeterlik Araştırması",
+    "subtitle": "Staj Projesi / Veri Analiz Raporu",
+    "author": "Sılacan Soyer",
+    "lang": "tr",
+    "date": "2026-08-24",
+    "input": "tests/fixtures/likert_tr.xlsx"
+  },
+  "loader": {
+    "encoding": null,
+    "delimiter": null,
+    "decimal": ".",
+    "warnings": []
+  },
+  "profile_alerts": [
+    "'Tükenmişlik': 5.0% missing — consider multiple imputation (MICE) rather than listwise deletion.",
+    "'Özyeterlik': 3 value(s) beyond 3 SD from the mean."
+  ],
+  "results": [
+    {
+      "id": "descriptives_continuous",
+      "heading": "Betimsel İstatistikler — Sürekli Değişkenler",
+      "tables": [
+        {
+          "id": "table_desc_continuous",
+          "caption": "Tablo 2. Sürekli Değişkenler İçin Betimsel İstatistikler",
+          "headers": [
+            "Değişken",
+            "n",
+            "M",
+            "SD",
+            "Çarpıklık",
+            "Basıklık"
+          ],
+          "rows": [
+            [
+              "Yaş",
+              "300",
+              "41,76",
+              "13,79",
+              "-0,02",
+              "-1,26"
+            ],
+            [
+              "İş Tatmini",
+              "300",
+              "2,69",
+              "0,91",
+              "-0,06",
+              "-0,79"
+            ],
+            [
+              "Tükenmişlik",
+              "285",
+              "2,78",
+              "0,91",
+              "0,11",
+              "-0,23"
+            ],
+            [
+              "Özyeterlik",
+              "300",
+              "3,96",
+              "0,66",
+              "-0,50",
+              "0,46"
+            ]
+          ],
+          "numeric_columns": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "note": null,
+          "merged_header_spans": []
+        }
+      ],
+      "figures": [
+        {
+          "id": "fig_desc_Yaş",
+          "path": "examples\\sample-report\\figures\\fig-desc-Yaş.png",
+          "caption": "Şekil 1. Yaş Değişkeninin Dağılımı"
+        },
+        {
+          "id": "fig_desc_İş Tatmini",
+          "path": "examples\\sample-report\\figures\\fig-desc-İş Tatmini.png",
+          "caption": "Şekil 2. İş Tatmini Değişkeninin Dağılımı"
+        },
+        {
+          "id": "fig_desc_Tükenmişlik",
+          "path": "examples\\sample-report\\figures\\fig-desc-Tükenmişlik.png",
+          "caption": "Şekil 3. Tükenmişlik Değişkeninin Dağılımı"
+        },
+        {
+          "id": "fig_desc_Özyeterlik",
+          "path": "examples\\sample-report\\figures\\fig-desc-Özyeterlik.png",
+          "caption": "Şekil 4. Özyeterlik Değişkeninin Dağılımı"
+        }
+      ],
+      "stats": {
+        "Yaş": {
+          "n": 300,
+          "mean": 41.763333333333335,
+          "sd": 13.793289613071124,
+          "skewness": -0.022668004550767066,
+          "kurtosis": -1.258862570788787
+        },
+        "İş Tatmini": {
+          "n": 300,
+          "mean": 2.6863333333333337,
+          "sd": 0.9110873482141042,
+          "skewness": -0.05563326612400298,
+          "kurtosis": -0.7923592358711127
+        },
+        "Tükenmişlik": {
+          "n": 285,
+          "mean": 2.7764912280701752,
+          "sd": 0.9068062110088301,
+          "skewness": 0.10952350393413796,
+          "kurtosis": -0.22815759101724042
+        },
+        "Özyeterlik": {
+          "n": 300,
+          "mean": 3.965,
+          "sd": 0.6625745367295729,
+          "skewness": -0.5003459130135435,
+          "kurtosis": 0.4555146166273141
+        }
+      },
+      "auto_prose": "Yaş değişkeni için ortalama 41,76 (SS = 13,79, n = 300) olarak hesaplanmıştır. İş Tatmini değişkeni için ortalama 2,69 (SS = 0,91, n = 300) olarak hesaplanmıştır. Tükenmişlik değişkeni için ortalama 2,78 (SS = 0,91, n = 285) olarak hesaplanmıştır. Özyeterlik değişkeni için ortalama 3,96 (SS = 0,66, n = 300) olarak hesaplanmıştır.",
+      "spss_syntax": "DESCRIPTIVES VARIABLES=Yaş İş_Tatmini Tükenmişlik Özyeterlik\n  /STATISTICS=MEAN STDDEV SKEWNESS KURTOSIS MIN MAX.",
+      "assumption_notes": [
+        "'Tükenmişlik': 5.0% missing — consider multiple imputation (MICE) rather than listwise deletion.",
+        "'Özyeterlik': 3 value(s) beyond 3 SD from the mean."
+      ],
+      "method_switched": null
+    },
+    {
+      "id": "correlation",
+      "heading": "Korelasyon Analizi",
+      "tables": [
+        {
+          "id": "table_correlation",
+          "caption": "Tablo 3. Korelasyon Matrisi",
+          "headers": [
+            "Değişken",
+            "1",
+            "2",
+            "3"
+          ],
+          "rows": [
+            [
+              "1. Yaş",
+              "",
+              "",
+              ""
+            ],
+            [
+              "2. İş Tatmini",
+              "-,05",
+              "",
+              ""
+            ],
+            [
+              "3. Tükenmişlik",
+              ",09",
+              "-,33***",
+              ""
+            ],
+            [
+              "4. Özyeterlik",
+              ",03",
+              "-,08",
+              "-,02"
+            ]
+          ],
+          "numeric_columns": [
+            1,
+            2,
+            3
+          ],
+          "note": "*p < ,05. **p < ,01. ***p < ,001.",
+          "merged_header_spans": []
+        }
+      ],
+      "figures": [
+        {
+          "id": "fig_correlation_heatmap",
+          "path": "examples\\sample-report\\figures\\fig-correlation-heatmap.png",
+          "caption": "Şekil 5. Korelasyon Isı Haritası"
+        }
+      ],
+      "stats": {
+        "Yaş~İş Tatmini": {
+          "r": -0.04788137049689799,
+          "p": 0.4206811671054256,
+          "n": 285
+        },
+        "Yaş~Tükenmişlik": {
+          "r": 0.08568192911685607,
+          "p": 0.14908390085420828,
+          "n": 285
+        },
+        "Yaş~Özyeterlik": {
+          "r": 0.025760078487555856,
+          "p": 0.6649851146972702,
+          "n": 285
+        },
+        "İş Tatmini~Tükenmişlik": {
+          "r": -0.3334750432827862,
+          "p": 7.88052909641291e-09,
+          "n": 285
+        },
+        "İş Tatmini~Özyeterlik": {
+          "r": -0.08071835424171041,
+          "p": 0.17417440182230443,
+          "n": 285
+        },
+        "Tükenmişlik~Özyeterlik": {
+          "r": -0.015189325100588664,
+          "p": 0.7984812808610888,
+          "n": 285
+        }
+      },
+      "auto_prose": "İş Tatmini ile Tükenmişlik arasında orta düzeyde bir ilişki bulunmuştur, r(283) = -,33, p < ,001.",
+      "spss_syntax": "CORRELATIONS /VARIABLES=Yaş İş_Tatmini Tükenmişlik Özyeterlik\n  /PRINT=TWOTAIL SIG\n  /MISSING=PAIRWISE.",
+      "assumption_notes": [],
+      "method_switched": null
+    },
+    {
+      "id": "comparison_Yaş",
+      "heading": "Grup Karşılaştırmaları",
+      "tables": [
+        {
+          "id": "table_comparison_Yaş",
+          "caption": "Tablo 4. Yaş Değişkeninin Cinsiyet Değişkenine Göre Karşılaştırması",
+          "headers": [
+            "Grup",
+            "n",
+            "M",
+            "SD"
+          ],
+          "rows": [
+            [
+              "Kadın",
+              "166",
+              "40,75",
+              "14,05"
+            ],
+            [
+              "Erkek",
+              "134",
+              "43,01",
+              "13,41"
+            ]
+          ],
+          "numeric_columns": [
+            1,
+            2,
+            3
+          ],
+          "note": null,
+          "merged_header_spans": []
+        }
+      ],
+      "figures": [
+        {
+          "id": "fig_comparison_Yaş",
+          "path": "examples\\sample-report\\figures\\fig-comparison-Yaş.png",
+          "caption": "Şekil 6. Yaş Değişkeninin Cinsiyet Değişkenine Göre Karşılaştırması"
+        }
+      ],
+      "stats": {
+        "test": "term.independent_ttest",
+        "statistic": -1.4144232361473354,
+        "df": 298.0,
+        "p": 0.1582816281049642,
+        "cohens_d": -0.1642606611285057,
+        "n_a": 166,
+        "n_b": 134,
+        "mean_a": 40.75301204819277,
+        "mean_b": 43.014925373134325
+      },
+      "auto_prose": "Bağımsız örneklem t-testi sonucunda Yaş değişkeninin Kadın (M = 40,75, SD = 14,05) ve Erkek (M = 43,01, SD = 13,41) grupları arasında anlamlı bir fark bulunmamıştır, t(298) = -1,41, p = ,158.",
+      "spss_syntax": "T-TEST GROUPS=Cinsiyet\n  /VARIABLES=Yaş\n  /CRITERIA=CI(.95).",
+      "assumption_notes": [],
+      "method_switched": null
+    },
+    {
+      "id": "regression_Özyeterlik",
+      "heading": "Regresyon Analizi",
+      "tables": [
+        {
+          "id": "table_regression_Özyeterlik",
+          "caption": "Tablo 5. Özyeterlik Değişkenini Yordayan Regresyon Sonuçları",
+          "headers": [
+            "Yordayıcı",
+            "B",
+            "SE",
+            "β",
+            "t",
+            "p",
+            "VIF"
+          ],
+          "rows": [
+            [
+              "(Sabit)",
+              "4,20",
+              "0,23",
+              "—",
+              "18,02",
+              "< ,001",
+              "—"
+            ],
+            [
+              "Yaş",
+              "0,00",
+              "0,00",
+              "0,03",
+              "0,43",
+              "= ,670",
+              "1,0"
+            ],
+            [
+              "İş Tatmini",
+              "-0,07",
+              "0,04",
+              "-0,10",
+              "-1,52",
+              "= ,129",
+              "1,1"
+            ],
+            [
+              "Tükenmişlik",
+              "-0,04",
+              "0,05",
+              "-0,05",
+              "-0,78",
+              "= ,435",
+              "1,1"
+            ]
+          ],
+          "numeric_columns": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "note": "*p < ,05. **p < ,01. ***p < ,001.",
+          "merged_header_spans": []
+        }
+      ],
+      "figures": [
+        {
+          "id": "fig_regression_Özyeterlik",
+          "path": "examples\\sample-report\\figures\\fig-regression-Özyeterlik.png",
+          "caption": "Şekil 7. Standartlaştırılmış Regresyon Katsayıları"
+        }
+      ],
+      "stats": {
+        "r_squared": 0.009150179601564612,
+        "adj_r_squared": -0.0014282882318708001,
+        "f": 0.8649815592995189,
+        "df1": 3,
+        "df2": 281,
+        "f_p": 0.4596636998421517,
+        "n": 285,
+        "predictors": {
+          "Yaş": {
+            "b": 0.0012064454661967572,
+            "beta": 0.02539501294025492,
+            "t": 0.42599633004878684,
+            "p": 0.6704366358791286,
+            "vif": 1.0078215638012005
+          },
+          "İş Tatmini": {
+            "b": -0.06845433672497003,
+            "beta": -0.09596513405143094,
+            "t": -1.523251417459263,
+            "p": 0.12882039018190974,
+            "vif": 1.1255952498205897
+          },
+          "Tükenmişlik": {
+            "b": -0.035461579459973414,
+            "beta": -0.04936719603069653,
+            "t": -0.7816187024438281,
+            "p": 0.43509674968059603,
+            "vif": 1.1313201470725116
+          }
+        }
+      },
+      "auto_prose": "Regresyon modeli Özyeterlik değişkenini anlamlı şekilde yordamıştır, F(3, 281) = 0,86, p = ,460, R² = 0,01 (düzeltilmiş R² = -0,00).",
+      "spss_syntax": "REGRESSION /DEPENDENT Özyeterlik\n  /METHOD=ENTER Yaş İş_Tatmini Tükenmişlik\n  /STATISTICS COEFF OUTS R ANOVA COLLIN TOL.",
+      "assumption_notes": [],
+      "method_switched": null
+    }
+  ]
+}

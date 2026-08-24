@@ -30,6 +30,8 @@ class VariableProfile:
     # numeric-only fields (None otherwise)
     mean: float | None = None
     sd: float | None = None
+    minimum: float | None = None
+    maximum: float | None = None
     skewness: float | None = None
     kurtosis: float | None = None
     normality_test: str | None = None  # "shapiro" | "skew_kurtosis_heuristic"
@@ -98,6 +100,8 @@ def _profile_numeric(series: pd.Series, vp: VariableProfile) -> None:
         return
     vp.mean = float(values.mean())
     vp.sd = float(values.std(ddof=1)) if n > 1 else 0.0
+    vp.minimum = float(values.min())
+    vp.maximum = float(values.max())
     vp.skewness = float(values.skew()) if n > 2 else None
     vp.kurtosis = float(values.kurtosis()) if n > 3 else None
 

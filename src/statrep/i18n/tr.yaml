@@ -12,6 +12,14 @@ section:
     subtitle_default: "İstatistiksel Analiz Raporu"
   toc: "İçindekiler"
   introduction: "Giriş"
+  purpose: "Çalışmanın Amacı"
+  dataset_overview: "Veri Setinin Tanıtımı"
+  data_prep: "Veri Hazırlama Süreci"
+  prep_merge: "Verilerin Birleştirilmesi ve Yüklenmesi"
+  prep_cleaning: "Veri Temizleme İşlemleri"
+  prep_variables: "Analiz Değişkenlerinin Oluşturulması"
+  prep_analysis_ready: "Verilerin Analize Hazırlanması"
+  general_analysis: "Genel Veri Analizi"
   data_quality: "Veri Kalitesi"
   descriptives:
     continuous: "Betimsel İstatistikler — Sürekli Değişkenler"
@@ -20,8 +28,14 @@ section:
   comparisons: "Grup Karşılaştırmaları"
   regression: "Regresyon Analizi"
   conclusion: "Sonuç ve Öneriler"
+  conclusion_general: "Genel Sonuçlar"
+  conclusion_comparisons: "Grup ve İlişki Sonuçları"
+  conclusion_models: "Model ve Yordama Sonuçları"
+  conclusion_recommendations: "Operasyonel ve Stratejik Öneriler"
   appendix:
-    assumptions: "Ek A: Varsayım Kontrolleri"
+    title: "Ekler"
+    variables: "Ek-1: Analizde Yer Alan Değişkenler"
+    assumptions: "Ek-2: Varsayım Kontrolleri"
 
 term:
   mean: "M"
@@ -39,6 +53,15 @@ term:
   frequency: "n"
   percent: "%"
   df: "sd"
+  data_type: "Veri Türü"
+  valid_n: "Geçerli N"
+  missing_rate: "Kayıp Oranı"
+  unique_count: "Tekil Değer"
+  description: "Açıklama"
+  kind_numeric: "Sürekli (Sayısal)"
+  kind_categorical: "Kategorik"
+  kind_datetime: "Tarih / Zaman"
+  kind_text: "Metin"
   independent_ttest: "Bağımsız örneklem t-testi"
   welch_ttest: "Welch t-testi"
   mann_whitney: "Mann-Whitney U testi"
@@ -58,6 +81,10 @@ term:
   by: "göre"
 
 table:
+  dataset_variables:
+    caption: "Tablo {n}. Veri Setinde Yer Alan Değişkenler ve Özellikleri"
+  appendix_variables:
+    caption: "Tablo {n}. Analiz Değişkenleri Dağılım ve Özet Listesi"
   desc_continuous:
     caption: "Tablo {n}. Sürekli Değişkenler İçin Betimsel İstatistikler"
   desc_categorical:

@@ -73,13 +73,13 @@ if (-not $Check) {
 New-Item -ItemType Directory -Force -Path $CapDir | Out-Null
 
 $RPresent = $false
-$RPackages = "[]"
+$RPackages = '[]'
 $rscript = Get-Command Rscript -ErrorAction SilentlyContinue
 if ($rscript) {
     $RPresent = $true
     try {
         $RPackages = & Rscript -e 'cat(paste0("[", paste(shQuote(rownames(installed.packages()), type="cmd"), collapse=","), "]"))' 2>$null
-    } catch { $RPackages = "[]" }
+    } catch { $RPackages = '[]' }
     Write-Host "  OK: R found"
 } else {
     Write-Host "  R not found - SEM/HLM analyses and the flextable table path will be unavailable (optional)" -ForegroundColor Yellow

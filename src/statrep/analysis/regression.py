@@ -5,8 +5,9 @@ more commonly cited threshold than the classic 10)."""
 
 from __future__ import annotations
 
-import statsmodels.api as sm
+from statsmodels.regression.linear_model import OLS
 from statsmodels.stats.outliers_influence import variance_inflation_factor
+from statsmodels.tools.tools import add_constant
 
 from statrep.figures.plots import plot_regression_coefficients
 
@@ -22,16 +23,16 @@ def run_linear_regression(df, dv: str, predictors: list[str], ctx: AnalysisConte
     data = df[[dv, *predictors]].dropna()
     n = len(data)
 
-    X_raw = sm.add_constant(data[predictors])
+    X_raw = add_constant(data[predictors])
     y = data[dv]
-    model = sm.OLS(y, X_raw).fit()
+    model = OLS(y, X_raw).fit()
 
     def z(series):
         return (series - series.mean()) / series.std(ddof=1)
 
-    Xz = sm.add_constant(data[predictors].apply(z))
+    Xz = add_constant(data[predictors].apply(z))
     yz = z(data[dv])
-    model_z = sm.OLS(yz, Xz).fit()
+    model_z = OLS(yz, Xz).fit()
     betas = model_z.params.drop("const")
     ci = model_z.conf_int().drop("const")
 
