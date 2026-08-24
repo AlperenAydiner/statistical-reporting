@@ -1,0 +1,6 @@
+.claude/*
+!.claude/skills/
+!.claude/commands/
+Thumbs.db
+.DS_Store
+*.log
