@@ -66,7 +66,7 @@ def cmd_profile(args: argparse.Namespace) -> int:
         print("Loading notes:")
         for warning in loaded.warnings:
             print(f"  - {warning}")
-    data_profile = profile(loaded.df)
+    data_profile = profile(loaded.df, lang=args.lang)
     print(f"\n{data_profile.n_rows} rows x {data_profile.n_columns} columns")
     for v in data_profile.variables:
         n_valid = v.n - v.n_missing

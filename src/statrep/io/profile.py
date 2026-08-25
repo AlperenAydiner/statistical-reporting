@@ -128,9 +128,10 @@ def _profile_numeric(series: pd.Series, vp: VariableProfile) -> None:
         vp.n_outliers_3sd = 0
 
 
-def profile(df: pd.DataFrame) -> DataProfile:
+def profile(df: pd.DataFrame, lang: str = "en") -> DataProfile:
     """Profile a DataFrame: per-column stats, normality routing, 3SD
-    outlier counts, and |r| > 0.8 multicollinearity flags."""
+    outlier counts, and |r| > 0.8 multicollinearity flags. ``lang``
+    controls the alert message language ("tr" | "en")."""
     n_rows, n_columns = df.shape
     result = DataProfile(n_rows=n_rows, n_columns=n_columns)
 
@@ -150,27 +151,52 @@ def profile(df: pd.DataFrame) -> DataProfile:
             _profile_numeric(series, vp)
         result.variables.append(vp)
 
+        missing_pct = f"%{vp.missing_rate * 100:.1f}" if lang == "tr" else f"{vp.missing_rate:.1%}"
         if vp.missing_rate > 0.20:
-            result.alerts.append(
-                f"'{vp.name}': {vp.missing_rate:.1%} missing — investigate whether "
-                f"missingness is random (Little's MCAR test) before imputing."
-            )
+            if lang == "tr":
+                result.alerts.append(
+                    f"'{vp.name}': {missing_pct} kayıp — hesaplama yapmadan önce kaybın "
+                    f"rastgele olup olmadığını (Little's MCAR testi) inceleyin."
+                )
+            else:
+                result.alerts.append(
+                    f"'{vp.name}': {missing_pct} missing — investigate whether "
+                    f"missingness is random (Little's MCAR test) before imputing."
+                )
         elif vp.missing_rate >= 0.05:
-            result.alerts.append(
-                f"'{vp.name}': {vp.missing_rate:.1%} missing — consider multiple "
-                f"imputation (MICE) rather than listwise deletion."
-            )
+            if lang == "tr":
+                result.alerts.append(
+                    f"'{vp.name}': {missing_pct} kayıp — listwise silme yerine çoklu "
+                    f"atama (MICE) düşünülmeli."
+                )
+            else:
+                result.alerts.append(
+                    f"'{vp.name}': {missing_pct} missing — consider multiple "
+                    f"imputation (MICE) rather than listwise deletion."
+                )
 
         if kind == "numeric" and vp.n_outliers_3sd:
-            result.alerts.append(
-                f"'{vp.name}': {vp.n_outliers_3sd} value(s) beyond 3 SD from the mean."
-            )
+            if lang == "tr":
+                result.alerts.append(
+                    f"'{vp.name}': ortalamadan 3 standart sapmanın ötesinde {vp.n_outliers_3sd} değer."
+                )
+            else:
+                result.alerts.append(
+                    f"'{vp.name}': {vp.n_outliers_3sd} value(s) beyond 3 SD from the mean."
+                )
         if kind == "numeric" and vp.is_normal is False:
-            test_label = "Shapiro-Wilk" if vp.normality_test == "shapiro" else "skew/kurtosis heuristic"
-            result.alerts.append(
-                f"'{vp.name}': fails normality ({test_label}) — non-parametric or "
-                f"robust methods may be more appropriate."
-            )
+            if lang == "tr":
+                test_label = "Shapiro-Wilk" if vp.normality_test == "shapiro" else "çarpıklık/basıklık sezgiseli"
+                result.alerts.append(
+                    f"'{vp.name}': normallik varsayımını karşılamıyor ({test_label}) — parametrik "
+                    f"olmayan veya sağlam yöntemler daha uygun olabilir."
+                )
+            else:
+                test_label = "Shapiro-Wilk" if vp.normality_test == "shapiro" else "skew/kurtosis heuristic"
+                result.alerts.append(
+                    f"'{vp.name}': fails normality ({test_label}) — non-parametric or "
+                    f"robust methods may be more appropriate."
+                )
 
     # Multicollinearity: |r| > 0.8 among numeric columns.
     numeric_cols = [v.name for v in result.variables if v.kind == "numeric"]
@@ -182,6 +208,9 @@ def profile(df: pd.DataFrame) -> DataProfile:
                 result.multicollinearity.append(CorrelationFlag(var_a=a, var_b=b, r=float(r)))
         if result.multicollinearity:
             pairs = ", ".join(f"{f.var_a}~{f.var_b} (r={f.r:.2f})" for f in result.multicollinearity)
-            result.alerts.append(f"Possible multicollinearity: {pairs}.")
+            if lang == "tr":
+                result.alerts.append(f"Olası çoklu bağlantı: {pairs}.")
+            else:
+                result.alerts.append(f"Possible multicollinearity: {pairs}.")
 
     return result

@@ -49,7 +49,12 @@ def _render_table(table: TableSpec) -> str:
         lines.append("| " + " | ".join(safe_row) + " |")
     lines.append("")
     if table.note:
-        lines.append(f"*{table.note}*")
+        # Escape literal asterisks in the note (APA significance markers like
+        # "*p < ,05") before wrapping the whole line in emphasis — otherwise
+        # pandoc parses them as nested emphasis delimiters and the stars
+        # that are supposed to be visible in the output vanish.
+        escaped_note = table.note.replace("*", "\\*")
+        lines.append(f"*{escaped_note}*")
         lines.append("")
     return "\n".join(lines)
 

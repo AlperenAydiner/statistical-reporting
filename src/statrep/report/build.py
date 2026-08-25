@@ -100,7 +100,7 @@ def build_report(
     output_dir.mkdir(parents=True, exist_ok=True)
 
     loaded = load(input_path)
-    data_profile = profile(loaded.df)
+    data_profile = profile(loaded.df, lang=lang)
     ctx = make_context(lang, figures_dir)
     t = ctx.t
 
@@ -168,12 +168,13 @@ def build_report(
 
     reference_docx = _REFERENCE_DIR / f"{template}.docx"
     docx_path = output_dir / "report.docx"
-    markdown_to_docx(md_path, docx_path, reference_docx)
+    toc_title = t("section.toc")
+    markdown_to_docx(md_path, docx_path, reference_docx, toc_title=toc_title)
     all_tables = [narrative.dataset_table] + [tbl for r in results for tbl in r.tables] + [narrative.appendix_table]
     postprocess(docx_path, all_tables)
 
     html_path = output_dir / "report.html"
-    markdown_to_html(md_path, html_path)
+    markdown_to_html(md_path, html_path, toc_title=toc_title)
 
     tables_xlsx_path = output_dir / "tables.xlsx"
     _write_tables_xlsx(all_tables, tables_xlsx_path)
